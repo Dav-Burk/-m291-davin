@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compteur — e1-7 (version livrée par l’IA)</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; background:#fffefa; color:#1c1917; margin:0; }
+    header { background:#1c1917; color:#fffefa; padding:.85rem 1.2rem; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; font-weight:700; }
+    main { max-width: 28rem; margin:0 auto; padding:2rem 1.1rem; }
+    .count { font-size: 4rem; font-weight:700; margin:.4rem 0 1rem; }
+    button { background:#ea580c; color:#fff; border:0; padding:.6rem 1.1rem; font-size:1rem; font-weight:700; cursor:pointer; }
+    .note { color:#57534e; font-size:.95rem; }
+  </style>
+</head>
+<body>
+  <header>Fiche e1-7 · L’IA a tort · M291</header>
+  <main>
+    <h1>Compteur</h1>
+    <p class="note">Livré par une IA. « Ça marche. » Vraiment ?</p>
+    <p class="count" id="affiche">0</p>
+    <button type="button" id="plus">+1</button>
+  </main>
+  <script>
+    // Boîte « n » : le vrai compteur, en mémoire.
+    let n = 0;
+
+    const bouton = document.getElementById("plus");
+
+    bouton.addEventListener("click", function () {
+      n = n + 1;
+      console.log("n vaut maintenant", n);
+    });
+  </script>
+</body>
+</html>
