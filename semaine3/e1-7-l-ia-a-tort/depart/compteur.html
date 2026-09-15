@@ -21,16 +21,17 @@
     <p class="count" id="affiche">0</p>
     <button type="button" id="plus">+1</button>
   </main>
-  <script>
-    // Boîte « n » : le vrai compteur, en mémoire.
-    let n = 0;
+<script>
+  let n = 0;
 
-    const bouton = document.getElementById("plus");
+  const bouton = document.getElementById("plus");
+  const affiche = document.getElementById("affiche");
 
-    bouton.addEventListener("click", function () {
-      n = n + 1;
-      console.log("n vaut maintenant", n);
-    });
-  </script>
+  bouton.addEventListener("click", function () {
+    n = n + 1;
+    affiche.textContent = n;
+    console.log("n vaut maintenant", n);
+  });
+</script>
 </body>
 </html>

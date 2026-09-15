@@ -65,14 +65,14 @@ function montrer() {
 }
 
 document.getElementById("frites").addEventListener("click", function () {
-  total = total + "6";
+  total = total + 6;
   document.getElementById("panier").textContent =
     document.getElementById("panier").textContent + "Frites ";
   montrer();
 });
 
 document.getElementById("boisson").addEventListener("click", function () {
-  total = total + "4";
+  total = total + 4;
   document.getElementById("panier").textContent =
     document.getElementById("panier").textContent + "Boisson ";
   montrer();
@@ -88,8 +88,9 @@ document.getElementById("promo").addEventListener("click", function () {
 });
 
 document.getElementById("vider").addEventListener("click", function () {
+  total = 0;
   document.getElementById("panier").textContent = "";
-  document.getElementById("affiche").textContent = "0 CHF";
+  montrer();
 });</pre>
       </section>
     </div>
@@ -112,7 +113,7 @@ document.getElementById("vider").addEventListener("click", function () {
     }
 
     document.getElementById("frites").addEventListener("click", function () {
-      total = total + "6";
+      total = total + 6;
       document.getElementById("panier").textContent =
         document.getElementById("panier").textContent + "Frites ";
       montrer();
@@ -120,7 +121,7 @@ document.getElementById("vider").addEventListener("click", function () {
     });
 
     document.getElementById("boisson").addEventListener("click", function () {
-      total = total + "4";
+      total = total + 4;
       document.getElementById("panier").textContent =
         document.getElementById("panier").textContent + "Boisson ";
       montrer();
@@ -138,8 +139,9 @@ document.getElementById("vider").addEventListener("click", function () {
     });
 
     document.getElementById("vider").addEventListener("click", function () {
+      total = 0;
       document.getElementById("panier").textContent = "";
-      document.getElementById("affiche").textContent = "0 CHF";
+      montrer();
       console.log("plateau vidé, total en mémoire :", total);
     });
   </script>
