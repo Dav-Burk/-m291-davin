@@ -1,0 +1,50 @@
+body.piste-c {
+  --paper: #f4f5f1;
+  --panel: #e0e2dd;
+  --panel-strong: #c9cdc6;
+  --ink: #111411;
+  --muted: #4d544e;
+  --line: #969d96;
+  --accent: #d9ff3f;
+  --accent-soft: #d9ff3f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.piste-c .screen-title,
+.piste-c .saved-places h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+.piste-c .organize-button,
+.piste-c .metric-tabs .tab-clouds {
+  background: var(--accent);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.piste-c .logo-button,
+.piste-c .organize-header .logo-button {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.piste-c .organize-button,
+.piste-c .organize-current,
+.piste-c .back-button,
+.piste-c .location-select,
+.piste-c .metric-label,
+.piste-c .small-placeholder,
+.piste-c .place-row,
+.piste-c .route-list li a,
+.piste-c .metric-tabs a,
+.piste-c .detail-placeholder,
+.piste-c .close-placeholder {
+  border-radius: 0;
+}
+
+.piste-c .route-list li a,
+.piste-c .detail-placeholder,
+.piste-c .weather-placeholder {
+  border: 1px solid var(--line);
+}

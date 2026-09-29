@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MaMétéo — nouvelle maquette</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="stage" aria-label="Maquette MaMétéo">
+    <svg class="connections" viewBox="0 0 715 888" aria-hidden="true">
+      <path d="M197 62 L267 81" />
+      <path d="M188 622 L264 625" />
+      <path d="M188 686 L264 691" />
+      <path d="M188 753 L264 758" />
+      <path d="M188 817 L264 824" />
+      <path d="M445 553 L504 570" />
+      <path d="M445 699 L504 690" />
+      <path d="M445 811 L504 692" />
+    </svg>
+
+    <section class="screen home-screen" id="accueil" aria-labelledby="home-title">
+      <h1 class="screen-title" id="home-title">Accueil</h1>
+      <div class="home-page">
+        <header class="home-header">
+          <a class="logo-button" href="#accueil">Logo</a>
+          <a class="organize-button" href="#organisation">Organiser vos trajets</a>
+        </header>
+        <a class="location-select" href="#lieux">Vos lieux</a>
+        <section class="weather-summary" aria-label="Météo actuelle">
+          <a class="metric-label" href="#precision">Température</a>
+          <a class="weather-placeholder" href="#precision" aria-label="Voir les précisions de température"></a>
+          <a class="metric-label" href="#precision">Vent</a>
+          <a class="weather-placeholder" href="#precision" aria-label="Voir les précisions sur le vent"></a>
+          <a class="metric-label" href="#precision">Nuages</a>
+          <a class="weather-placeholder" href="#precision" aria-label="Voir les précisions sur les nuages"></a>
+        </section>
+        <section class="saved-places" id="lieux" aria-label="Vos lieux suivants">
+          <h2>Vos lieux suivants</h2>
+          <div class="place-row">
+            <span class="place-name" aria-label="Lieu suivant"></span>
+            <a href="#precision">Température</a><a href="#precision">Vent</a><a href="#precision">Nuages</a>
+          </div>
+          <div class="place-row">
+            <span class="place-name" aria-label="Lieu suivant"></span>
+            <a href="#precision">Température</a><a href="#precision">Vent</a><a href="#precision">Nuages</a>
+          </div>
+          <div class="place-row">
+            <span class="place-name" aria-label="Lieu suivant"></span>
+            <a href="#precision">Température</a><a href="#precision">Vent</a><a href="#precision">Nuages</a>
+          </div>
+          <div class="place-row">
+            <span class="place-name" aria-label="Lieu suivant"></span>
+            <a href="#precision">Température</a><a href="#precision">Vent</a><a href="#precision">Nuages</a>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <div class="middle-column">
+      <section class="screen organize-screen" id="organisation" aria-labelledby="organize-title">
+        <h2 class="screen-title" id="organize-title">Organisation des déplacements</h2>
+        <div class="organize-page">
+          <header class="organize-header">
+            <a href="#accueil" class="back-button">Bouton<br>retour</a>
+            <a href="#organisation" class="organize-current">Organiser vos trajets</a>
+            <a href="#accueil" class="logo-button">Logo</a>
+          </header>
+          <ol class="route-list" aria-label="Ordre des lieux">
+            <li><a href="#accueil" aria-label="Lieu 1"></a><span aria-hidden="true">☰</span></li>
+            <li><a href="#accueil" aria-label="Lieu 2"></a><span aria-hidden="true">☰</span></li>
+            <li><a href="#accueil" aria-label="Lieu 3"></a><span aria-hidden="true">☰</span></li>
+            <li><a href="#accueil" aria-label="Lieu 4"></a><span aria-hidden="true">☰</span></li>
+            <li><a href="#accueil" aria-label="Lieu 5"></a><span aria-hidden="true">☰</span></li>
+            <li><a href="#accueil" aria-label="Lieu 6"></a><span aria-hidden="true">☰</span></li>
+          </ol>
+        </div>
+      </section>
+      <section class="screen precision-screen" id="precision" aria-labelledby="precision-title">
+        <h2 class="screen-title" id="precision-title">Précisions</h2>
+        <div class="precision-page">
+          <nav class="metric-tabs" aria-label="Type de précision">
+            <a href="#precision-plus" aria-label="Température" class="tab-temperature"></a>
+            <a href="#precision-plus" aria-label="Vent" class="tab-wind"></a>
+            <a href="#precision-plus" aria-label="Nuages" class="tab-clouds"></a>
+          </nav>
+          <div class="small-placeholder"></div>
+          <a class="detail-placeholder" href="#precision-plus" aria-label="Voir des précisions plus précises"></a>
+          <div class="small-placeholder lower"></div>
+          <a class="detail-placeholder second" href="#precision-plus" aria-label="Voir des précisions supplémentaires"></a>
+          <div class="small-placeholder lower"></div>
+          <a class="detail-placeholder third" href="#precision-plus" aria-label="Voir les précisions détaillées"></a>
+        </div>
+      </section>
+    </div>
+
+    <section class="screen precise-screen" id="precision-plus" aria-labelledby="precise-title">
+      <h2 class="screen-title" id="precise-title">Précisions plus précises</h2>
+      <div class="precise-page">
+        <nav class="metric-tabs" aria-label="Type de précision">
+          <a href="#precision" aria-label="Température" class="tab-temperature"></a>
+          <a href="#precision" aria-label="Vent" class="tab-wind"></a>
+          <a href="#precision" aria-label="Nuages" class="tab-clouds"></a>
+        </nav>
+        <div class="small-placeholder"></div>
+        <div class="detail-placeholder tall"></div>
+        <div class="small-placeholder lower"></div>
+        <a class="close-placeholder" href="#precision" aria-label="Fermer les précisions">×</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

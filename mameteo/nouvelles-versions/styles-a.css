@@ -1,0 +1,39 @@
+body.piste-a {
+  --paper: #fbfaf6;
+  --panel: #e5e8ec;
+  --panel-strong: #d6dde5;
+  --ink: #182d46;
+  --muted: #617288;
+  --line: #b4bfcb;
+  --accent: #29496c;
+  --accent-soft: #cbd8e7;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.piste-a .screen-title,
+.piste-a .saved-places h2 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.piste-a .logo-button,
+.piste-a .organize-header .logo-button {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.piste-a .organize-button,
+.piste-a .organize-current,
+.piste-a .back-button,
+.piste-a .location-select,
+.piste-a .metric-label,
+.piste-a .small-placeholder,
+.piste-a .place-row,
+.piste-a .route-list li a,
+.piste-a .metric-tabs a,
+.piste-a .close-placeholder {
+  border-radius: 1px;
+}
+
+.piste-a .metric-tabs .tab-clouds {
+  background: var(--accent-soft);
+}
