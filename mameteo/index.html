@@ -1,3 +1,121 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaMétéo — pistes de maquettes</title><link rel="stylesheet" href="styles.css"></head>
-<body class="showcase"><main><p class="eyebrow">MaMétéo · Direction artistique</p><h1>La météo de vos habitudes,<br>en un coup d’œil.</h1><p class="intro">Trois pistes visuelles pour l’application de Jean : consulter la météo de ses trajets habituels, sans devoir la chercher.</p><section class="tracks" aria-label="Choisir une piste graphique"><a class="track track-a" href="piste-a.html"><span>Piste A</span><strong>Éditoriale<br>&amp; sobre</strong><small>Bleu nuit · gris perle</small></a><a class="track track-b" href="piste-b.html"><span>Piste B</span><strong>Chaleureuse<br>&amp; terroir</strong><small>Sauge · terracotta</small></a><a class="track track-c" href="piste-c.html"><span>Piste C</span><strong>Moderne<br>&amp; pragmatique</strong><small>Contraste · action vive</small></a></section></main></body></html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f8f7f3">
+	<title>MaMétéo — vos trajets, en un coup d’œil</title>
+	<link rel="stylesheet" href="app.css">
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<div class="app-shell">
+		<header class="topbar">
+			<a class="header-back" href="#accueil" aria-label="Retour à l’accueil" hidden><span aria-hidden="true">←</span></a>
+			<a class="brand" href="#accueil" aria-label="MaMétéo, accueil"><span class="brand-mark">M</span>MaMétéo</a>
+			<a class="organize-button" id="organize-cta" href="#organisation">Organiser vos trajets <span aria-hidden="true">↗</span></a>
+		</header>
+
+		<main>
+			<section class="screen home-screen" id="accueil" data-screen="accueil" aria-labelledby="home-title">
+				<div class="home-intro">
+					<p class="eyebrow" id="today-label">VOTRE MÉTÉO, EN UN COUP D’ŒIL</p>
+					<h1 id="home-title">Bonjour Jean<span>,</span></h1>
+					<p class="lede">La météo de vos habitudes, au bon endroit et au bon moment.</p>
+				</div>
+
+				<section class="weather-overview" aria-label="Météo du lieu sélectionné">
+					<div class="location-heading">
+						<label class="location-select-label" for="featured-place">Vos lieux</label>
+						<select class="location-select" id="featured-place" aria-label="Choisir un lieu"></select>
+						<span class="location-time" id="featured-time"></span>
+					</div>
+					<div class="weather-summary" id="weather-summary">
+						<a class="summary-metric" href="#precision" data-summary-metric="temperature"><span class="metric-label">Température</span><strong id="summary-temperature">17°</strong><span class="metric-hint">Ressenti 16° <span aria-hidden="true">↗</span></span></a>
+						<a class="summary-metric" href="#precision" data-summary-metric="wind"><span class="metric-label">Vent</span><strong id="summary-wind">14 <small>km/h</small></strong><span class="metric-hint">Modéré <span aria-hidden="true">↗</span></span></a>
+						<a class="summary-metric" href="#precision" data-summary-metric="clouds"><span class="metric-label">Nuages</span><strong id="summary-clouds">70<small>%</small></strong><span class="metric-hint">Couverture <span aria-hidden="true">↗</span></span></a>
+					</div>
+					<p class="demo-note overview-note">Météo de démonstration</p>
+				</section>
+
+				<div class="section-heading" id="lieux">
+					<div><p class="eyebrow">SELON VOS HEURES DE PASSAGE</p><h2>Vos lieux suivants</h2></div>
+					<label class="search-box"><span class="visually-hidden">Rechercher un lieu</span><span aria-hidden="true">⌕</span><input id="place-search" type="search" placeholder="Rechercher un lieu…"></label>
+				</div>
+				<div class="place-list" id="place-grid" aria-live="polite"></div>
+				<p class="empty-state" id="empty-state" hidden>Aucun lieu ne correspond à votre recherche.</p>
+			</section>
+
+			<section class="screen organize-screen" id="organisation" data-screen="organisation" aria-labelledby="organize-title" hidden>
+				<div class="page-heading">
+					<p class="eyebrow">VOS HABITUDES, À VOTRE RYTHME</p>
+					<h1 id="organize-title">Organiser vos trajets</h1>
+					<p class="lede">Ajoutez vos lieux et indiquez à quelle heure vous y passez d’habitude.</p>
+				</div>
+				<div class="organize-layout">
+					<section class="route-panel" aria-labelledby="route-heading">
+						<div class="section-heading compact-heading"><div><p class="eyebrow">ORDRE DE PASSAGE</p><h2 id="route-heading">Vos lieux enregistrés</h2></div></div>
+						<ol class="route-list" id="route-list"></ol>
+					</section>
+					<aside class="settings-panel">
+						<form class="add-form" id="add-place-form">
+							<p class="eyebrow">UN NOUVEAU REPÈRE</p>
+							<h2>Ajouter un lieu</h2>
+							<label for="new-place-name">Nom du lieu</label>
+							<input id="new-place-name" name="name" type="text" placeholder="Ex. Neuchâtel" maxlength="48" required>
+							<label for="new-place-time">Heure de passage habituelle</label>
+							<input id="new-place-time" name="time" type="time" value="18:00" required>
+							<button class="primary-button" type="submit">Ajouter le lieu <span aria-hidden="true">+</span></button>
+						</form>
+						<div class="notification-setting">
+							<div><strong>Rappel météo</strong><p>Recevoir un rappel une heure avant le trajet.</p></div>
+							<label class="switch"><input id="notification-setting" type="checkbox" aria-label="Activer les rappels météo"><span aria-hidden="true"></span></label>
+						</div>
+					</aside>
+				</div>
+			</section>
+
+			<section class="screen detail-screen" id="precision" data-screen="precision" aria-labelledby="detail-title" hidden>
+				<a class="back-link" href="#accueil">← <span>Retour à mes lieux</span></a>
+				<div class="detail-heading">
+					<div><p class="eyebrow" id="detail-kicker">VOTRE TRAJET · 17:30</p><h1 id="detail-title">Yverdon-les-Bains</h1><p class="lede" id="detail-description">Un ciel nuageux vous attend après le travail.</p></div>
+					<div class="detail-temperature"><span class="weather-symbol" id="detail-symbol" aria-hidden="true">☁</span><strong id="detail-temperature-value">17°</strong><span id="detail-condition">Nuageux</span></div>
+				</div>
+				<div class="weather-measures" aria-label="Toutes les données météo">
+					<section class="weather-measure" aria-labelledby="temperature-heading">
+						<h2 class="measure-title" id="temperature-heading">Température</h2>
+						<div class="measure-panel">
+							<div class="measure-primary"><span class="measure-symbol" id="temperature-symbol" aria-hidden="true">☁</span><strong id="measure-temperature-value">17°</strong><span id="measure-condition">Nuageux</span></div>
+							<div class="measure-secondary"><div class="measure-stat"><span>Température ressentie</span><strong id="fact-feels-like">16°</strong></div><p id="temperature-advice">Une veste légère suffira.</p></div>
+						</div>
+					</section>
+					<section class="weather-measure" aria-labelledby="wind-heading">
+						<h2 class="measure-title" id="wind-heading">Vent</h2>
+						<div class="measure-panel">
+							<div class="measure-primary"><span class="measure-symbol wind-symbol" aria-hidden="true">↗</span><strong id="fact-wind">14 <small>km/h</small></strong><span>Vitesse moyenne</span></div>
+							<div class="measure-secondary measure-stats"><div class="measure-stat"><span>Direction</span><strong id="wind-direction">Ouest</strong></div><div class="measure-stat"><span>Rafales</span><strong id="wind-gusts">21 km/h</strong></div><p id="wind-advice">Le vent restera modéré.</p></div>
+						</div>
+					</section>
+					<section class="weather-measure" aria-labelledby="clouds-heading">
+						<h2 class="measure-title" id="clouds-heading">Nuages</h2>
+						<div class="measure-panel">
+							<div class="measure-primary"><span class="measure-symbol" aria-hidden="true">☁</span><strong id="fact-clouds">70 %</strong><span>Couverture nuageuse</span></div>
+							<div class="measure-secondary measure-stats"><div class="cloud-cover-track" aria-label="Couverture nuageuse"><span id="cloud-cover-fill"></span></div><div class="measure-stat"><span>Humidité</span><strong id="fact-humidity">68 %</strong></div><div class="measure-stat"><span>Risque de pluie</span><strong id="fact-precipitation">20 %</strong></div></div>
+						</div>
+					</section>
+				</div>
+				<a class="forecast-link" href="#precision-plus">Voir les prévisions heure par heure <span aria-hidden="true">→</span></a>
+				<p class="demo-note detail-demo-note">Prévisions de démonstration</p>
+			</section>
+
+			<section class="screen forecast-screen" id="precision-plus" data-screen="precision-plus" aria-labelledby="forecast-title" hidden>
+				<a class="back-link" href="#precision">← <span>Retour aux précisions</span></a>
+				<div class="page-heading forecast-heading"><p class="eyebrow">ÉVOLUTION DU CIEL</p><h1 id="forecast-title">Les prochaines heures</h1><p class="lede" id="forecast-location">Yverdon-les-Bains · aujourd’hui</p></div>
+				<div class="forecast-strip" id="forecast-strip" aria-label="Prévisions heure par heure"></div>
+				<a class="primary-button forecast-back" href="#precision">J’ai ma réponse <span aria-hidden="true">→</span></a>
+			</section>
+		</main>
+		<footer><span>MaMétéo</span><span>Vos trajets, simplement.</span></footer>
+	</div>
+</body>
+</html>
