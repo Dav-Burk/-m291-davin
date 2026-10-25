@@ -31,11 +31,12 @@
 						<span class="location-time" id="featured-time"></span>
 					</div>
 					<div class="weather-summary" id="weather-summary">
-						<a class="summary-metric" href="#precision" data-summary-metric="temperature"><span class="metric-label">Température</span><strong id="summary-temperature">17°</strong><span class="metric-hint">Ressenti 16° <span aria-hidden="true">↗</span></span></a>
-						<a class="summary-metric" href="#precision" data-summary-metric="wind"><span class="metric-label">Vent</span><strong id="summary-wind">14 <small>km/h</small></strong><span class="metric-hint">Modéré <span aria-hidden="true">↗</span></span></a>
-						<a class="summary-metric" href="#precision" data-summary-metric="clouds"><span class="metric-label">Nuages</span><strong id="summary-clouds">70<small>%</small></strong><span class="metric-hint">Couverture <span aria-hidden="true">↗</span></span></a>
+						<a class="summary-metric" href="#precision" data-summary-metric="temperature"><span class="metric-label">Température</span><strong id="summary-temperature">—</strong><span class="metric-hint"><span id="summary-temperature-hint">Prévision au passage</span><span aria-hidden="true">↗</span></span></a>
+						<a class="summary-metric" href="#precision" data-summary-metric="wind"><span class="metric-label">Vent</span><strong id="summary-wind">— <small>km/h</small></strong><span class="metric-hint"><span id="summary-wind-hint">Prévision au passage</span><span aria-hidden="true">↗</span></span></a>
+						<a class="summary-metric" href="#precision" data-summary-metric="clouds"><span class="metric-label">Nuages</span><strong id="summary-clouds">—<small>%</small></strong><span class="metric-hint"><span id="summary-clouds-hint">Prévision au passage</span><span aria-hidden="true">↗</span></span></a>
 					</div>
-					<p class="demo-note overview-note">Météo de démonstration</p>
+					<div class="weather-status-row"><p class="weather-status" id="weather-status" role="status">Chargement des prévisions météo…</p><button class="refresh-weather" id="refresh-weather" type="button" disabled>Actualiser</button></div>
+					<p class="weather-attribution">Données météo : <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></p>
 				</section>
 
 				<div class="section-heading" id="lieux">
@@ -61,16 +62,21 @@
 						<form class="add-form" id="add-place-form">
 							<p class="eyebrow">UN NOUVEAU REPÈRE</p>
 							<h2>Ajouter un lieu</h2>
-							<label for="new-place-name">Nom du lieu</label>
-							<input id="new-place-name" name="name" type="text" placeholder="Ex. Neuchâtel" maxlength="48" required>
+							<label for="new-place-name">Rechercher une ville ou un lieu</label>
+							<div class="place-search-field">
+								<input id="new-place-name" name="name" type="search" placeholder="Ex. Neuchâtel" maxlength="80" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="place-suggestions" aria-expanded="false" aria-describedby="place-search-status" required>
+								<ul class="place-suggestions" id="place-suggestions" role="listbox" aria-label="Suggestions de lieux" hidden></ul>
+							</div>
+							<p class="place-search-status" id="place-search-status" role="status" aria-live="polite">Saisissez au moins deux caractères pour rechercher un lieu.</p>
 							<label for="new-place-time">Heure de passage habituelle</label>
 							<input id="new-place-time" name="time" type="time" value="18:00" required>
 							<button class="primary-button" type="submit">Ajouter le lieu <span aria-hidden="true">+</span></button>
 						</form>
 						<div class="notification-setting">
-							<div><strong>Rappel météo</strong><p>Recevoir un rappel une heure avant le trajet.</p></div>
+							<div><strong>Rappels de trajet</strong><p>Les lieux sont réglés sur un rappel une heure avant. Activez les notifications pour recevoir les alertes.</p></div>
 							<label class="switch"><input id="notification-setting" type="checkbox" aria-label="Activer les rappels météo"><span aria-hidden="true"></span></label>
 						</div>
+						<p class="notification-status" id="notification-status" role="status"></p>
 					</aside>
 				</div>
 			</section>
@@ -78,40 +84,40 @@
 			<section class="screen detail-screen" id="precision" data-screen="precision" aria-labelledby="detail-title" hidden>
 				<a class="back-link" href="#accueil">← <span>Retour à mes lieux</span></a>
 				<div class="detail-heading">
-					<div><p class="eyebrow" id="detail-kicker">VOTRE TRAJET · 17:30</p><h1 id="detail-title">Yverdon-les-Bains</h1><p class="lede" id="detail-description">Un ciel nuageux vous attend après le travail.</p></div>
-					<div class="detail-temperature"><span class="weather-symbol" id="detail-symbol" aria-hidden="true">☁</span><strong id="detail-temperature-value">17°</strong><span id="detail-condition">Nuageux</span></div>
+					<div><p class="eyebrow" id="detail-kicker">VOTRE TRAJET · 17:30</p><h1 id="detail-title">Yverdon-les-Bains</h1><p class="lede" id="detail-description">Chargement des prévisions météo…</p></div>
+					<div class="detail-temperature"><span class="weather-symbol" id="detail-symbol" aria-hidden="true">…</span><strong id="detail-temperature-value">—</strong><span id="detail-condition">—</span></div>
 				</div>
 				<div class="weather-measures" aria-label="Toutes les données météo">
 					<section class="weather-measure" aria-labelledby="temperature-heading">
 						<h2 class="measure-title" id="temperature-heading">Température</h2>
 						<div class="measure-panel">
-							<div class="measure-primary"><span class="measure-symbol" id="temperature-symbol" aria-hidden="true">☁</span><strong id="measure-temperature-value">17°</strong><span id="measure-condition">Nuageux</span></div>
-							<div class="measure-secondary"><div class="measure-stat"><span>Température ressentie</span><strong id="fact-feels-like">16°</strong></div><p id="temperature-advice">Une veste légère suffira.</p></div>
+							<div class="measure-primary"><span class="measure-symbol" id="temperature-symbol" aria-hidden="true">…</span><strong id="measure-temperature-value">—</strong><span id="measure-condition">—</span></div>
+							<div class="measure-secondary"><div class="measure-stat"><span>Température ressentie</span><strong id="fact-feels-like">—</strong></div><p id="temperature-advice">Chargement des prévisions météo…</p></div>
 						</div>
 					</section>
 					<section class="weather-measure" aria-labelledby="wind-heading">
 						<h2 class="measure-title" id="wind-heading">Vent</h2>
 						<div class="measure-panel">
-							<div class="measure-primary"><span class="measure-symbol wind-symbol" aria-hidden="true">↗</span><strong id="fact-wind">14 <small>km/h</small></strong><span>Vitesse moyenne</span></div>
-							<div class="measure-secondary measure-stats"><div class="measure-stat"><span>Direction</span><strong id="wind-direction">Ouest</strong></div><div class="measure-stat"><span>Rafales</span><strong id="wind-gusts">21 km/h</strong></div><p id="wind-advice">Le vent restera modéré.</p></div>
+							<div class="measure-primary"><span class="measure-symbol wind-symbol" aria-hidden="true">↗</span><strong id="fact-wind">— <small>km/h</small></strong><span>Vitesse moyenne</span></div>
+							<div class="measure-secondary measure-stats"><div class="measure-stat"><span>Direction</span><strong id="wind-direction">—</strong></div><div class="measure-stat"><span>Rafales</span><strong id="wind-gusts">—</strong></div><p id="wind-advice">Chargement des prévisions météo…</p></div>
 						</div>
 					</section>
 					<section class="weather-measure" aria-labelledby="clouds-heading">
 						<h2 class="measure-title" id="clouds-heading">Nuages</h2>
 						<div class="measure-panel">
-							<div class="measure-primary"><span class="measure-symbol" aria-hidden="true">☁</span><strong id="fact-clouds">70 %</strong><span>Couverture nuageuse</span></div>
-							<div class="measure-secondary measure-stats"><div class="cloud-cover-track" aria-label="Couverture nuageuse"><span id="cloud-cover-fill"></span></div><div class="measure-stat"><span>Humidité</span><strong id="fact-humidity">68 %</strong></div><div class="measure-stat"><span>Risque de pluie</span><strong id="fact-precipitation">20 %</strong></div></div>
+							<div class="measure-primary"><span class="measure-symbol" aria-hidden="true">☁</span><strong id="fact-clouds">—</strong><span>Couverture nuageuse</span></div>
+							<div class="measure-secondary measure-stats"><div class="cloud-cover-track" aria-label="Couverture nuageuse"><span id="cloud-cover-fill"></span></div><div class="measure-stat"><span>Humidité</span><strong id="fact-humidity">—</strong></div><div class="measure-stat"><span>Risque de pluie</span><strong id="fact-precipitation">—</strong></div></div>
 						</div>
 					</section>
 				</div>
 				<a class="forecast-link" href="#precision-plus">Voir les prévisions heure par heure <span aria-hidden="true">→</span></a>
-				<p class="demo-note detail-demo-note">Prévisions de démonstration</p>
+				<p class="weather-attribution">Prévisions fournies par <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>.</p>
 			</section>
 
 			<section class="screen forecast-screen" id="precision-plus" data-screen="precision-plus" aria-labelledby="forecast-title" hidden>
 				<a class="back-link" href="#precision">← <span>Retour aux précisions</span></a>
 				<div class="page-heading forecast-heading"><p class="eyebrow">ÉVOLUTION DU CIEL</p><h1 id="forecast-title">Les prochaines heures</h1><p class="lede" id="forecast-location">Yverdon-les-Bains · aujourd’hui</p></div>
-				<div class="forecast-strip" id="forecast-strip" aria-label="Prévisions heure par heure"></div>
+				<div class="forecast-strip" id="forecast-strip" aria-label="Prévisions autour de l’heure de passage"></div>
 				<a class="primary-button forecast-back" href="#precision">J’ai ma réponse <span aria-hidden="true">→</span></a>
 			</section>
 		</main>
