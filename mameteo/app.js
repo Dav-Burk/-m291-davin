@@ -66,6 +66,35 @@ function currentView() {
 
 function renderView() {
   const view = currentView();
+  const activeScreen = screens.find((screen) => !screen.hidden);
+  const nextScreen = screens.find((screen) => screen.dataset.screen === view);
+  const updateView = () => renderViewContent(view);
+
+  if (!activeScreen || activeScreen === nextScreen) {
+    updateView();
+    return;
+  }
+
+  if (typeof document.startViewTransition === "function" && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    activeScreen.style.viewTransitionName = "active-screen";
+    const transition = document.startViewTransition(() => {
+      activeScreen.style.viewTransitionName = "none";
+      nextScreen.style.viewTransitionName = "active-screen";
+      updateView();
+    });
+    transition.finished.then(
+      () => { nextScreen.style.viewTransitionName = "none"; },
+      () => { nextScreen.style.viewTransitionName = "none"; }
+    );
+    return;
+  }
+
+  nextScreen.classList.add("is-entering");
+  nextScreen.addEventListener("animationend", () => nextScreen.classList.remove("is-entering"), { once: true });
+  updateView();
+}
+
+function renderViewContent(view) {
   const isOrganizing = view === "organisation";
   screens.forEach((screen) => { screen.hidden = screen.dataset.screen !== view; });
   document.querySelector(".topbar").classList.toggle("is-organizing", isOrganizing);
@@ -120,12 +149,12 @@ function renderPlaces(filter = "") {
     const wind = weather?.status === "loaded" ? formatWeatherValue(weather.wind, " km/h") : "—";
     const clouds = weather?.status === "loaded" ? formatWeatherValue(weather.clouds, "%") : "—";
     return `
-    <div class="place-row">
-      <a class="place-name" href="#precision" data-place="${escapeHtml(place.id)}" data-metric-link="temperature"><span class="place-time">${place.time}</span><strong>${escapeHtml(place.name)}</strong><span class="place-condition">${weatherMarkup(place)} ${escapeHtml(condition)}</span><span class="place-see-all">Toutes les données <span aria-hidden="true">→</span></span></a>
+    <article class="place-row">
+      <a class="place-name" href="#precision" data-place="${escapeHtml(place.id)}" data-metric-link="temperature"><span class="place-time">${place.time}</span><h3>${escapeHtml(place.name)}</h3><span class="place-condition">${weatherMarkup(place)} ${escapeHtml(condition)}</span><span class="place-see-all">Toutes les données <span aria-hidden="true">→</span></span></a>
       <a class="place-metric" href="#precision" data-place="${escapeHtml(place.id)}" data-metric-link="temperature"><span>Température</span><strong>${temperature}</strong></a>
       <a class="place-metric" href="#precision" data-place="${escapeHtml(place.id)}" data-metric-link="wind"><span>Vent</span><strong>${wind}</strong></a>
       <a class="place-metric" href="#precision" data-place="${escapeHtml(place.id)}" data-metric-link="clouds"><span>Nuages</span><strong>${clouds}</strong></a>
-    </div>`;
+    </article>`;
   }).join("");
   document.querySelector("#empty-state").hidden = matches.length > 0;
 }
